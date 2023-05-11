@@ -3,7 +3,8 @@ Simple Shellcode Loader tool
 
 # Usage
 ```
-go run ./ShellGo.exe -a x64 -f file.exe -o output.exe
+go build ./ShellGo.go
+./ShellGo.exe -a x64 -f file.exe -o output.exe
 
 Examples:
   Use Stub of Fibers and encrypt with rc4
