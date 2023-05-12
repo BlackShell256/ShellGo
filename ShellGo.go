@@ -246,8 +246,10 @@ func (c Args) Encrypt(shellcode []byte) {
 		TemplateDec = []byte(fmt.Sprintf("buf = dec(buf, %s)", c.Key))
 	}
 
+	c.Stub = bytes.Replace(c.Stub, []byte("<<Extra>>"), []byte(""), 1)
 	c.Stub = bytes.Replace(c.Stub, []byte("<<ShellCode>>"), ShellcodeF, 1)
 	c.Stub = bytes.Replace(c.Stub, []byte("<<Dec>>"), TemplateDec, 1)
+	fmt.Println(string(c.Stub))
 	err := os.WriteFile("pay.go", c.Stub, 0644)
 	Error("writing file", err)
 
@@ -347,10 +349,10 @@ Add a preference of encryption
 -e / --encrypt :  1-obfuscation (default), 2-rc4, 3-xor
 
 Value of key to encrypt if use Rc4 or Xor by default is random
--k / --key :   exmaple -k jksa89128as
+-k / --key :   example -k jksa89128as
 
 Name of payload
--o / --out :    exmaple --output test.exe
+-o / --out :    example --output test.exe
 
 Build file with terminal, use only for tools whith CLI, example: mimikatz
 -t / --terminal
