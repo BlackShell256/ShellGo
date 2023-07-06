@@ -249,7 +249,6 @@ func (c Args) Encrypt(shellcode []byte) {
 	c.Stub = bytes.Replace(c.Stub, []byte("<<Extra>>"), []byte(""), 1)
 	c.Stub = bytes.Replace(c.Stub, []byte("<<ShellCode>>"), ShellcodeF, 1)
 	c.Stub = bytes.Replace(c.Stub, []byte("<<Dec>>"), TemplateDec, 1)
-	fmt.Println(string(c.Stub))
 	err := os.WriteFile("pay.go", c.Stub, 0644)
 	Error("writing file", err)
 
